@@ -4,16 +4,16 @@
 int main()
 {
 	constexpr unsigned size = 1000000;
-	std::array<bool, size> is_prime;
+	std::array<bool, size + 1> is_prime;
 	is_prime.fill(true);
+	is_prime[0] = is_prime[1] = false;
 
-	for (int i = 2; i < sqrt(size); ++i)
+	for (int i = 2; i <= sqrt(size); ++i)
 	{
 		if (is_prime[i])
-			for (int j = i * i; j < size; j += i)
+			for (int j = i * i; j <= size; j += i)
 			{
-				if (is_prime[j])
-					is_prime[j] = false;
+				is_prime[j] = false;
 			}
 	}
 
@@ -22,7 +22,7 @@ int main()
 	{
 		std::cout << "input number: ";
 		std::cin >> number;
-		if (number <= 0 || number >= size) {
+		if (number <= 0 || number > size) {
 			break;
 		}
 		if (number == 1)
